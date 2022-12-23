@@ -12,7 +12,7 @@ string tabelKelasMK[6][8] = {
     };
 
 //JADWAL TIAP KELAS
-vector<vector<int>> BI = {{1,1}}; //BIA - BIB - BIC
+vector<vector<int>> BI = {{1,1},{2,2}}; //BIA - BIB - BIC
 vector<vector<int>> KI = {{1,1},{1,3}}; //KIA - KIB - KIC
 
 void printJadwal(vector<string> &matkul, int jadwalJadi[5][13]){
@@ -39,37 +39,40 @@ void printJadwal(vector<string> &matkul, int jadwalJadi[5][13]){
 
 int main(int argc, char const *argv[])
 {
-    int jadwalJadi[5][13] = {
-       //0,1,2,3,4,5,6,7,8,9,0,1,2
-        {0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0}
-    };
+    for(int mBI=0;mBI<BI.size();mBI++){
 
-    vector<string> matkul;
-    matkul.push_back("");
-
-    jadwalJadi[BI[0][0]][BI[0][1]] = 1;
     
-    //bakal error karena sama sama 1 1  
+        int jadwalJadi[5][13] = {
+           //0,1,2,3,4,5,6,7,8,9,0,1,2
+            {0,0,0,0,0,0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0,0,0,0,0,0}
+        };
 
-    for(int mKI=0;mKI<KI.size();mKI++){
-        if(jadwalJadi[KI[mKI][0]][KI[mKI][1]]!=0){
-            continue;
+        vector<string> matkul;
+        matkul.push_back("");
+
+        jadwalJadi[BI[mBI][0]][BI[mBI][1]] = 1;
+        
+        //
+        for(int mKI=0;mKI<KI.size();mKI++){
+            if(jadwalJadi[KI[mKI][0]][KI[mKI][1]]!=0){
+                continue;
+            }
+            jadwalJadi[KI[mKI][0]][KI[mKI][1]] = 2;
+            matkul.push_back(tabelKelasMK[0][mBI]);
+            matkul.push_back(tabelKelasMK[1][mKI]);
+            matkul.push_back("");
+            matkul.push_back("");
+            matkul.push_back("");
+            matkul.push_back("");
+            printJadwal(matkul, jadwalJadi);   
         }
-        jadwalJadi[KI[mKI][0]][KI[mKI][1]] = 2;
-        matkul.push_back(tabelKelasMK[0][0]);
-        matkul.push_back(tabelKelasMK[1][mKI]);
-        matkul.push_back("");
-        matkul.push_back("");
-        matkul.push_back("");
-        matkul.push_back("");
+    //
     }
-
-    printJadwal(matkul, jadwalJadi);
-
+    cin.get();
     return 0;
 }
 
