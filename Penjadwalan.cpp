@@ -20,7 +20,28 @@ vector<vector<vector<int>>> BI = {
     }; 
 vector<vector<vector<int>>> KI = {
     {{3,1},{3,2},{1,1}},//KIA
-    {{4,1},{4,2},{2,2}} //KIB
+    {{4,1},{4,2},{2,2}},//KIB
+    {{1,3},{1,4},{1,5}} //KIC
+    }; 
+vector<vector<vector<int>>> SM = {
+    {{3,1},{3,2},{1,1}},//SMA
+    {{4,1},{4,2},{2,2}},//SMB
+    {{2,1},{2,2},{2,3}} //SMC
+    }; 
+vector<vector<vector<int>>> PW = {
+    {{3,1},{3,2},{1,1}},
+    {{4,1},{4,2},{2,2}},
+    {{0,0},{0,1},{0,2}} 
+    }; 
+vector<vector<vector<int>>> AP = {
+    {{3,1},{3,2},{1,1}},
+    {{4,1},{4,2},{2,2}},
+    {{0,3},{0,4},{0,5}} 
+    }; 
+vector<vector<vector<int>>> PM = {
+    {{3,1},{3,2},{1,1}},
+    {{4,1},{4,2},{2,2}},
+    {{0,7},{0,8},{0,9}}
     }; 
 
 void printJadwal(vector<string> &matkul, vector<vector<int>> &jadwalJadi){
@@ -52,7 +73,7 @@ bool checkAvailable(vector<vector<int>> &jadwalJadi,vector<vector<int>> &mk){
     return true;
 }
 
-void inputToJadwal(vector<vector<int>> &jadwalJadi,vector<vector<int>> &mk, int &kodeMK){
+void inputToJadwal(vector<vector<int>> &jadwalJadi,vector<vector<int>> &mk, int kodeMK){
     for(int i=0;i<mk.size();i++){
         jadwalJadi[mk[i][0]][mk[i][1]] = kodeMK;
     }
@@ -62,33 +83,62 @@ int main(int argc, char const *argv[])
 {
     for(int mBI=0;mBI<BI.size();mBI++){
         for(int mKI=0;mKI<KI.size();mKI++){
+            for(int mSM=0;mSM<SM.size();mSM++){
+                for(int mPW=0;mPW<PW.size();mPW++){
+                    for(int mAP=0;mAP<AP.size();mAP++){
+                        for(int mPM=0;mPM<PM.size();mPM++){
+                            
+                            vector<vector<int>> jadwalJadi = {
+                               //0,1,2,3,4,5,6,7,8,9,0,1,2
+                                {0,0,0,0,0,0,0,0,0,0,0,0,0},
+                                {0,0,0,0,0,0,0,0,0,0,0,0,0},
+                                {0,0,0,0,0,0,0,0,0,0,0,0,0},
+                                {0,0,0,0,0,0,0,0,0,0,0,0,0},
+                                {0,0,0,0,0,0,0,0,0,0,0,0,0}
+                            };
+                            vector<string> matkul;
+                            
+                            inputToJadwal(jadwalJadi, BI[mBI], 1);
+                            //KI
+                            if(!checkAvailable(jadwalJadi, KI[mKI])){
+                                continue;
+                            }
+                            inputToJadwal(jadwalJadi, KI[mKI], 2);
+                            //SM
+                            if(!checkAvailable(jadwalJadi, SM[mSM])){
+                                continue;
+                            }
+                            inputToJadwal(jadwalJadi, SM[mSM], 3);
+                            //PW
+                            if(!checkAvailable(jadwalJadi, PW[mPW])){
+                                continue;
+                            }
+                            inputToJadwal(jadwalJadi, PW[mPW], 4);
+                            //AP
+                            if(!checkAvailable(jadwalJadi, AP[mAP])){
+                                continue;
+                            }
+                            inputToJadwal(jadwalJadi, AP[mAP], 5);
+                            //PM
+                            if(!checkAvailable(jadwalJadi, PM[mPM])){
+                                continue;
+                            }
+                            inputToJadwal(jadwalJadi, PM[mPM], 6);
 
-            vector<vector<int>> jadwalJadi = {
-               //0,1,2,3,4,5,6,7,8,9,0,1,2
-                {0,0,0,0,0,0,0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0,0,0,0,0,0,0}
-            };
-            vector<string> matkul;
-            inputToJadwal(jadwalJadi, BI[mBI], 1);
+                            matkul.push_back(tabelKelasMK[0][mBI]);
+                            matkul.push_back(tabelKelasMK[1][mKI]);
+                            matkul.push_back(tabelKelasMK[2][mSM]);
+                            matkul.push_back(tabelKelasMK[3][mPW]);
+                            matkul.push_back(tabelKelasMK[4][mAP]);
+                            matkul.push_back(tabelKelasMK[5][mPM]);
 
-            //CHECK available
-            if(!checkAvailable(jadwalJadi, KI[mKI])){
-                continue;
+                            printJadwal(matkul, jadwalJadi);   
+
+                        }
+                    }
+                }
             }
 
-            inputToJadwal(jadwalJadi, KI[mKI], 2);
-
-            matkul.push_back(tabelKelasMK[0][mBI]);
-            matkul.push_back(tabelKelasMK[1][mKI]);
-            matkul.push_back("");
-            matkul.push_back("");
-            matkul.push_back("");
-            matkul.push_back("");
-
-            printJadwal(matkul, jadwalJadi);   
         }
     }
     // cin.get();
