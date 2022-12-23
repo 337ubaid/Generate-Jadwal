@@ -14,14 +14,13 @@ string tabelKelasMK[6][8] = {
 
 //JADWAL TIAP KELAS
 vector<vector<vector<int>>> BI = {
-    // {1,1},{3,1},{4,1}
     {{1,1},{1,2}},//BIA
     {{2,1},{2,2}},//BIB
     {{3,2},{3,3}} //BIC
     }; 
 vector<vector<vector<int>>> KI = {
-    {{3,1},{3,2}},//KIA
-    {{4,1},{4,2}} //KIB
+    {{3,1},{3,2},{1,1}},//KIA
+    {{4,1},{4,2},{2,2}} //KIB
     }; 
 
 void printJadwal(vector<string> &matkul, vector<vector<int>> &jadwalJadi){
@@ -53,7 +52,7 @@ bool checkAvailable(vector<vector<int>> &jadwalJadi,vector<vector<int>> &mk){
     return true;
 }
 
-void inputToJadwal(vector<vector<int>> &jadwalJadi,vector<vector<int>> &mk, int kodeMK){
+void inputToJadwal(vector<vector<int>> &jadwalJadi,vector<vector<int>> &mk, int &kodeMK){
     for(int i=0;i<mk.size();i++){
         jadwalJadi[mk[i][0]][mk[i][1]] = kodeMK;
     }
@@ -64,14 +63,6 @@ int main(int argc, char const *argv[])
     for(int mBI=0;mBI<BI.size();mBI++){
         for(int mKI=0;mKI<KI.size();mKI++){
 
-            // int jadwalJadi[5][13]= {
-            //    //0,1,2,3,4,5,6,7,8,9,0,1,2
-            //     {0,0,0,0,0,0,0,0,0,0,0,0,0},
-            //     {0,0,0,0,0,0,0,0,0,0,0,0,0},
-            //     {0,0,0,0,0,0,0,0,0,0,0,0,0},
-            //     {0,0,0,0,0,0,0,0,0,0,0,0,0},
-            //     {0,0,0,0,0,0,0,0,0,0,0,0,0}
-            // };
             vector<vector<int>> jadwalJadi = {
                //0,1,2,3,4,5,6,7,8,9,0,1,2
                 {0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -81,18 +72,13 @@ int main(int argc, char const *argv[])
                 {0,0,0,0,0,0,0,0,0,0,0,0,0}
             };
             vector<string> matkul;
-            // jadwalJadi[BI[mBI][0]][BI[mBI][1]] = 1;
-            // jadwalJadi[BI[mBI][0][0]][BI[mBI][0][1]] = 1;
-            // jadwalJadi[BI[mBI][1][0]][BI[mBI][1][1]] = 1;
             inputToJadwal(jadwalJadi, BI[mBI], 1);
 
             //CHECK available
             if(!checkAvailable(jadwalJadi, KI[mKI])){
                 continue;
             }
-            
-            // jadwalJadi[KI[mKI][0][0]][KI[mKI][0][1]] = 2;
-            // jadwalJadi[KI[mKI][1][0]][KI[mKI][1][1]] = 2;
+
             inputToJadwal(jadwalJadi, KI[mKI], 2);
 
             matkul.push_back(tabelKelasMK[0][mBI]);
@@ -101,11 +87,11 @@ int main(int argc, char const *argv[])
             matkul.push_back("");
             matkul.push_back("");
             matkul.push_back("");
-            
+
             printJadwal(matkul, jadwalJadi);   
         }
     }
-    cin.get();
+    // cin.get();
     return 0;
 }
 
