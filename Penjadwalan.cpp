@@ -14,6 +14,7 @@ string tabelKelasMK[6][8] = {
 //JADWAL TIAP KELAS
 vector<vector<int>> BI = {{1,1},{2,1}}; //BIA - BIB - BIC
 vector<vector<int>> KI = {{3,1},{4,1}}; //KIA - KIB - KIC
+// vector<vector<vector<int>>> KI = {{{3,1}},{{4,1},{4,2}}}; //KIA - KIB - KIC
 
 void printJadwal(vector<string> &matkul, int jadwalJadi[5][13]){
     //string matkul [7] = {"", "BI", "KI", "SM", "PW", "AP", "PM"};
@@ -27,7 +28,7 @@ void printJadwal(vector<string> &matkul, int jadwalJadi[5][13]){
     printf("| 09.35 - 10.25 |  %4s  |  %4s  |  %4s  |  %4s  |  %4s  |\n", matkul[jadwalJadi[0][3]].data(), matkul[jadwalJadi[1][3]].data(), matkul[jadwalJadi[2][3]].data(), matkul[jadwalJadi[3][3]].data(), matkul[jadwalJadi[4][3]].data());
     printf("| 10.30 - 11.20 |  %4s  |  %4s  |  %4s  |  %4s  |  %4s  |\n", matkul[jadwalJadi[0][4]].data(), matkul[jadwalJadi[1][4]].data(), matkul[jadwalJadi[2][4]].data(), matkul[jadwalJadi[3][4]].data(), matkul[jadwalJadi[4][4]].data());
     printf("| 11.20 - 12.10 |  %4s  |  %4s  |  %4s  |  %4s  |  %4s  |\n", matkul[jadwalJadi[0][5]].data(), matkul[jadwalJadi[1][5]].data(), matkul[jadwalJadi[2][5]].data(), matkul[jadwalJadi[3][5]].data(), matkul[jadwalJadi[4][5]].data());
-    printf("|       -       |   --   |   --   |   --   |   --   |   --   |\n", matkul[jadwalJadi[0][6]].data(), matkul[jadwalJadi[1][6]].data(), matkul[jadwalJadi[2][6]].data(), matkul[jadwalJadi[3][6]].data(), matkul[jadwalJadi[4][6]].data());
+    printf("|       -       |   --   |   --   |   --   |   --   |   --   |\n");
     printf("| 12.30 - 13.20 |  %4s  |  %4s  |  %4s  |  %4s  |  %4s  |\n", matkul[jadwalJadi[0][7]].data(), matkul[jadwalJadi[1][7]].data(), matkul[jadwalJadi[2][7]].data(), matkul[jadwalJadi[3][7]].data(), matkul[jadwalJadi[4][7]].data());
     printf("| 13.20 - 14.10 |  %4s  |  %4s  |  %4s  |  %4s  |  %4s  |\n", matkul[jadwalJadi[0][8]].data(), matkul[jadwalJadi[1][8]].data(), matkul[jadwalJadi[2][8]].data(), matkul[jadwalJadi[3][8]].data(), matkul[jadwalJadi[4][8]].data());
     printf("| 14.15 - 15.05 |  %4s  |  %4s  |  %4s  |  %4s  |  %4s  |\n", matkul[jadwalJadi[0][9]].data(), matkul[jadwalJadi[1][9]].data(), matkul[jadwalJadi[2][9]].data(), matkul[jadwalJadi[3][9]].data(), matkul[jadwalJadi[4][9]].data());
