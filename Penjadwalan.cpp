@@ -12,9 +12,16 @@ string tabelKelasMK[6][8] = {
     };
 
 //JADWAL TIAP KELAS
-vector<vector<int>> BI = {{1,1},{2,1}}; //BIA - BIB - BIC
-vector<vector<int>> KI = {{3,1},{4,1}}; //KIA - KIB - KIC
-// vector<vector<vector<int>>> KI = {{{3,1}},{{4,1},{4,2}}}; //KIA - KIB - KIC
+vector<vector<int>> BI = {
+    {1,1},{3,1},{4,1}
+    // {{1,1},{1,2}},//BIA
+    // {{2,1},{2,2}},//BIB
+    // {{3,2},{3,3}} //BIC
+    }; 
+vector<vector<vector<int>>> KI = {
+    {{3,1},{3,2}},//KIA
+    {{4,1},{4,2}} //KIB
+    }; 
 
 void printJadwal(vector<string> &matkul, int jadwalJadi[5][13]){
     //string matkul [7] = {"", "BI", "KI", "SM", "PW", "AP", "PM"};
@@ -38,6 +45,15 @@ void printJadwal(vector<string> &matkul, int jadwalJadi[5][13]){
     printf("==============================================================\n");
 }
 
+bool checkAvailable(int jadwalJadi[5][13], int &m, int &size){
+    for(int i=0;i<size;i++){
+        if(jadwalJadi[KI[m][i][0]][KI[m][i][1]]!=0){
+                return false;
+        }
+    }
+    return true;
+}
+
 int main(int argc, char const *argv[])
 {
     for(int mBI=0;mBI<BI.size();mBI++){
@@ -53,12 +69,21 @@ int main(int argc, char const *argv[])
             };
             vector<string> matkul;
             jadwalJadi[BI[mBI][0]][BI[mBI][1]] = 1;
+            // jadwalJadi[BI[mBI][0][0]][BI[mBI][0][1]] = 1;
+            // jadwalJadi[BI[mBI][1][0]][BI[mBI][1][1]] = 1;
 
-            if(jadwalJadi[KI[mKI][0]][KI[mKI][1]]!=0){
+            //CHECK available
+            int size = 2;
+            if(!checkAvailable(jadwalJadi, mKI, size)){
                 continue;
             }
+            // if(jadwalJadi[KI[mKI][0][0]][KI[mKI][0][1]]!=0 || 
+            // jadwalJadi[KI[mKI][1][0]][KI[mKI][1][1]]!=0){
+            //     continue;
+            // }
 
-            jadwalJadi[KI[mKI][0]][KI[mKI][1]] = 2;
+            jadwalJadi[KI[mKI][0][0]][KI[mKI][0][1]] = 2;
+            jadwalJadi[KI[mKI][1][0]][KI[mKI][1][1]] = 2;
             matkul.push_back(tabelKelasMK[0][mBI]);
             matkul.push_back(tabelKelasMK[1][mKI]);
             matkul.push_back("");
